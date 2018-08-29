@@ -1,0 +1,25 @@
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\File Sorting.exe.config
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\File Sorting.exe
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\File Sorting.pdb
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File Sorting.csprojAssemblyReference.cache
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File_Sorting.Properties.Resources.resources
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File Sorting.csproj.GenerateResource.cache
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File Sorting.csproj.CoreCompileInputs.cache
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File Sorting.exe
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File Sorting.pdb
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File_Sorting.frmMain.resources
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\Interop.WMPLib.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\Interop.WMPLib.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File Sorting.csproj.ResolveComReference.cache
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\Interop.Shell32.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\AxInterop.Shell32.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\Interop.Shell32.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\AxInterop.Shell32.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\DotNetZip.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\taglib-sharp.dll
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\DotNetZip.xml
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\bin\Debug\policy.2.0.taglib-sharp.config
+C:\Users\Cyberadmin\Desktop\FileSorting\File Sorting\obj\Debug\File Sorting.csproj.CopyComplete
