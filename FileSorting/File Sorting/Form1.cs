@@ -37,9 +37,9 @@ namespace File_Sorting
         private void btnVideo_Click(object sender, EventArgs e)
         {
 
-            
             string ext = System.IO.Path.GetExtension(txtPath.Text);
-            if(ext == ".wmv")
+
+            if(VideoTypes.Contains(ext.ToLower()))
             {
                 Video videoFile = new Video(txtPath.Text);
                 txtOutput.Text = "Video" + Environment.NewLine +
@@ -58,7 +58,7 @@ namespace File_Sorting
 
 
             }
-            else if(GraphicTypes.ContainsKey(ext))
+            else if(GraphicTypes.Contains(ext.ToLower()))
             {
                 Graphic graphicFile = new Graphic(txtPath.Text);
                 txtOutput.Text = "Graphic" + Environment.NewLine +
@@ -70,6 +70,20 @@ namespace File_Sorting
                            graphicFile.ModifiedDate.ToLongDateString() +
                            Environment.NewLine + "Read-only?: " + graphicFile.ReadOnly.ToString() +
                            Environment.NewLine + "Resolution: " + graphicFile.Resolution;
+            }
+            else if(AudioTypes.Contains(ext.ToLower()))
+            {
+                Audio audioFile = new Audio(txtPath.Text);
+
+                txtOutput.Text = "Audio" + Environment.NewLine + "File Name: " + audioFile.Name + Environment.NewLine +
+                           "Path: " + audioFile.Path + Environment.NewLine +
+                           "Size (bytes): " + audioFile.FileSize.ToString() + Environment.NewLine +
+                           "Date Created: " + audioFile.CreateDate.ToLongDateString() +
+                           Environment.NewLine + "Last Modified: " +
+                           audioFile.ModifiedDate.ToLongDateString() +
+                           Environment.NewLine + "Read-only?: " + audioFile.ReadOnly.ToString() + Environment.NewLine +
+                           "Artist: " +audioFile.Artist + Environment.NewLine + "Album: " + audioFile.Album + Environment.NewLine + 
+                           "Genre: " + audioFile.Genre + Environment.NewLine +  "Length (in seconds): " + audioFile.LengthInSeconds;
             }
             else
             {
@@ -88,32 +102,37 @@ namespace File_Sorting
             
         }
 
-        public Dictionary<string, string> GraphicTypes = new Dictionary<string, string>();
-        public Dictionary<string, string> VideoTypes = new Dictionary<string, string>();
-        public Dictionary<string, string> AudioTypes = new Dictionary<string, string>();
+        public List<string> GraphicTypes = new List<string>();
+        public List<string> VideoTypes = new List<string>();
+        public List<string> AudioTypes = new List<string>();
+        public List<string> DocumentTypes = new List<string>();
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            GraphicTypes.Add(".jpg", "Graphic");
-            GraphicTypes.Add(".jpeg", "Graphic");
-            GraphicTypes.Add(".png", "Graphic");
-            GraphicTypes.Add(".bmp", "Graphic");
-            GraphicTypes.Add(".tiff", "Graphic");
+            GraphicTypes.Add(".jpg");
+            GraphicTypes.Add(".jpeg");
+            GraphicTypes.Add(".png");
+            GraphicTypes.Add(".bmp");
+            GraphicTypes.Add(".tiff");
 
-            VideoTypes.Add(".mp4", "Video");
-            VideoTypes.Add(".wmv", "Video");
-            VideoTypes.Add(".flv", "Video");
-            VideoTypes.Add(".ogg", "Video");
-            VideoTypes.Add(".avi", "Video");
-            VideoTypes.Add(".webm", "Video");
-            AudioTypes.Add(".gif", "Video");
+            VideoTypes.Add(".mp4");
+            VideoTypes.Add(".wmv");
+            VideoTypes.Add(".flv");
+            VideoTypes.Add(".ogg");
+            VideoTypes.Add(".avi");
+            VideoTypes.Add(".webm");
+            VideoTypes.Add(".gif");
 
-            AudioTypes.Add(".mp3", "Audio");
-            AudioTypes.Add(".wav", "Audio");
-            AudioTypes.Add(".flac", "Audio");
-            AudioTypes.Add(".aiff", "Audio");
-            AudioTypes.Add(".aax", "Audio");
-            AudioTypes.Add(".aa", "Audio");
+            AudioTypes.Add(".mp3");
+            AudioTypes.Add(".wav");
+            AudioTypes.Add(".flac");
+            AudioTypes.Add(".aiff");
+            AudioTypes.Add(".aax");
+            AudioTypes.Add(".aa");
+
+            DocumentTypes.Add(".pdf");
+            DocumentTypes.Add(".docx");
+            DocumentTypes.Add(".txt");
         }
     }
 }

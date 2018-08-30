@@ -11,7 +11,7 @@ namespace File_Sorting
     {
         private string _name;
         private string _path;
-        private long _fileSize;
+        private ulong _fileSize;
         private DateTime _createDate;
         private DateTime _modDate;
         private bool _readOnly;
@@ -43,7 +43,7 @@ namespace File_Sorting
             _path = filePath;
             string[] info = FullFileInfo(filePath);
             _name = info[0];
-            _fileSize = long.Parse(info[1]);
+            _fileSize = ulong.Parse(info[1]);
             _createDate = DateTime.Parse(info[2]);
             _modDate = DateTime.Parse(info[3]);
             _readOnly = bool.Parse(info[4]);
@@ -53,38 +53,37 @@ namespace File_Sorting
 
         public string Name
         {
-            get { return _name; }
+            get { return _name ?? ""; }
         }
 
         public string Path
         {
-            get { return _path; }
+            get { return _path ?? ""; }
         }
 
-        public long FileSize
+        public ulong FileSize
         {
             get { return _fileSize; }
         }
 
         public DateTime CreateDate
         {
-            get { return _createDate; }
+            get { return (_createDate != null) ? _createDate : DateTime.MinValue; }
         }
 
         public DateTime ModifiedDate
         {
-            get { return _modDate; }
+            get { return (_modDate != null) ? _modDate : DateTime.MinValue; }
         }
 
         public bool ReadOnly
         {
             get { return _readOnly; }
-            set { _readOnly = value; }
         }
 
         public string Extension
         {
-            get { return _extension; }
+            get { return _extension ?? ""; }
         }
 
         private string[] FullFileInfo(string filePath)
@@ -92,7 +91,7 @@ namespace File_Sorting
             System.IO.FileInfo file = new System.IO.FileInfo(filePath);
 
             string[] aspects = new string[6];
-            aspects[0] = file.Name;
+            aspects[0] = file.Name.Replace(file.Extension, "");
             aspects[1] = file.Length.ToString();
             aspects[2] = file.CreationTime.ToLongDateString();
             aspects[3] = file.LastWriteTime.ToLongDateString();

@@ -27,8 +27,8 @@ namespace File_Sorting
         }
         public Video(string filePath) : base(filePath)
         {
-            string list = TagLib.FileTypes.AvailableTypes.ToString();
-            if (this.Extension == ".wmv")
+            
+            if (this.Extension.ToLower() == ".wmv")
             {
                 TagLib.Asf.File a = new TagLib.Asf.File(filePath);
 
@@ -52,7 +52,7 @@ namespace File_Sorting
             }
 
 
-            else if (this.Extension == ".mp4")
+            else if (this.Extension.ToLower() == ".mp4")
             {
                 TagLib.Mpeg4.File a = new TagLib.Mpeg4.File(filePath);
 
@@ -70,11 +70,11 @@ namespace File_Sorting
                         _frameRate = G.VideoFrameRate;
                     }
                 }
-
+                //TODO: Figure out frame rate.
             }
 
 
-            else if (this.Extension == ".webm")
+            else if (this.Extension.ToLower() == ".webm")
             {
                 TagLib.Matroska.File a = new TagLib.Matroska.File(filePath);
 
@@ -94,19 +94,19 @@ namespace File_Sorting
 
         public string VideoCompression
         {
-            get { return _videoCompression; }
+            get { return _videoCompression ?? ""; }
         }
 
         public string AudioCompression
         {
-            get { return _audioCompression; }
+            get { return _audioCompression ?? ""; }
         }
 
 
 
         public string Resolution
         {
-            get { return _resolution; }
+            get { return _resolution ?? ""; }
         }
 
         public double FrameRate
