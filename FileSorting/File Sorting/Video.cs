@@ -47,6 +47,8 @@ namespace File_Sorting
                         _audioCompression = codec.Description;
                     }
                 }
+
+
                 _frameRate = 0;
 
             }
@@ -60,14 +62,22 @@ namespace File_Sorting
 
                 _resolution = a.Properties.VideoWidth.ToString() + " x " + a.Properties.VideoHeight.ToString();
 
-                TagLib.File f = TagLib.File.Create(filePath);
-
-                foreach (ICodec codec in f.Properties.Codecs)
+                foreach (ICodec codec in a.Properties.Codecs)
                 {
+                    if (codec.MediaTypes == TagLib.MediaTypes.Video)
+                    {
+                        _videoCompression = codec.Description;
+                    }
+                    else if (codec.MediaTypes == TagLib.MediaTypes.Audio)
+                    {
+                        _audioCompression = codec.Description;
+                    }
+
                     if (codec is TagLib.Mpeg.VideoHeader)
                     {
                         TagLib.Mpeg.VideoHeader G = (TagLib.Mpeg.VideoHeader)codec;
                         _frameRate = G.VideoFrameRate;
+
                     }
                 }
                 //TODO: Figure out frame rate.
