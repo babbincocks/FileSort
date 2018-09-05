@@ -90,5 +90,12 @@ namespace File_Sorting
         {
             get { return _lengthInSeconds; }
         }
+
+        public override void ViewFile()
+        {
+            System.Diagnostics.Process.Start(this.Path);
+        }
+
+
     }
 }

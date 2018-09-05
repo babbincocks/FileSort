@@ -52,5 +52,11 @@ namespace File_Sorting
             get { return (_resolution != null || _resolution != " x ") ? _resolution : "0 x 0"; }
         }
 
+        public override void ViewFile()
+        {
+            System.Diagnostics.Process.Start(this.Path);
+        }
+
+
     }
 }

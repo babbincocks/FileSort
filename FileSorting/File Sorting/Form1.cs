@@ -19,83 +19,58 @@ namespace File_Sorting
             InitializeComponent();
         }
 
-        private void btnSelectFile_Click(object sender, EventArgs e)
-        {
-
-            using (OpenFileDialog a = new OpenFileDialog())
-            {
-                if (a.ShowDialog() == DialogResult.OK)
-                {
-                    txtPath.Text = a.FileName;
-                }
-            }
-        }
-
         
 
 
         private void btnVideo_Click(object sender, EventArgs e)
         {
 
-            string ext = System.IO.Path.GetExtension(txtPath.Text);
+            string ext = System.IO.Path.GetExtension(txtFileSamp.Text);
 
             if(VideoTypes.Contains(ext.ToLower()))
             {
-                Video videoFile = new Video(txtPath.Text);
-                txtOutput.Text = "Video" + Environment.NewLine +
-                           "File Name: " + videoFile.Name + Environment.NewLine + 
-                           "Path: " + videoFile.Path + Environment.NewLine + 
-                           "Size (bytes): " + videoFile.FileSize.ToString() + Environment.NewLine + 
-                           "Date Created: " + videoFile.CreateDate.ToLongDateString() +
-                           Environment.NewLine + "Last Modified: " + 
-                           videoFile.ModifiedDate.ToLongDateString() +
-                           Environment.NewLine + "Read-only?: " + videoFile.ReadOnly.ToString() +
-                           Environment.NewLine + "Length (seconds): " + videoFile.SecondLength +
-                           Environment.NewLine + "Resolution: " +videoFile.Resolution +
-                           Environment.NewLine + "Frame Rate: " +videoFile.FrameRate +
-                           Environment.NewLine + "Video Compression: " + videoFile.VideoCompression +
-                           Environment.NewLine + "Audio Compression: " + videoFile.AudioCompression;
+                Video videoFile = new Video(txtFileSamp.Text);
+               
+                videoFile.ViewFile();
 
 
             }
             else if(GraphicTypes.Contains(ext.ToLower()))
             {
-                Graphic graphicFile = new Graphic(txtPath.Text);
-                txtOutput.Text = "Graphic" + Environment.NewLine +
-                           "File Name: " + graphicFile.Name + Environment.NewLine +
-                           "Path: " + graphicFile.Path + Environment.NewLine +
-                           "Size (bytes): " + graphicFile.FileSize.ToString() + Environment.NewLine +
-                           "Date Created: " + graphicFile.CreateDate.ToLongDateString() +
-                           Environment.NewLine + "Last Modified: " +
-                           graphicFile.ModifiedDate.ToLongDateString() +
-                           Environment.NewLine + "Read-only?: " + graphicFile.ReadOnly.ToString() +
-                           Environment.NewLine + "Resolution: " + graphicFile.Resolution;
+                Graphic graphicFile = new Graphic(txtFileSamp.Text);
+     
+
+                graphicFile.ViewFile();
             }
             else if(AudioTypes.Contains(ext.ToLower()))
             {
-                Audio audioFile = new Audio(txtPath.Text);
+                Audio audioFile = new Audio(txtFileSamp.Text);
 
-                txtOutput.Text = "Audio" + Environment.NewLine + "File Name: " + audioFile.Name + Environment.NewLine +
-                           "Path: " + audioFile.Path + Environment.NewLine +
-                           "Size (bytes): " + audioFile.FileSize.ToString() + Environment.NewLine +
-                           "Date Created: " + audioFile.CreateDate.ToLongDateString() +
-                           Environment.NewLine + "Last Modified: " +
-                           audioFile.ModifiedDate.ToLongDateString() +
-                           Environment.NewLine + "Read-only?: " + audioFile.ReadOnly.ToString() + Environment.NewLine +
-                           "Artist: " +audioFile.Artist + Environment.NewLine + "Album: " + audioFile.Album + Environment.NewLine + 
-                           "Genre: " + audioFile.Genre + Environment.NewLine +  "Length (in seconds): " + audioFile.LengthInSeconds;
+                audioFile.ViewFile();
+            }
+            else if(ArchiveTypes.Contains(ext.ToLower()))
+            {
+                Archive archiveFile = new Archive(txtFileSamp.Text);
+
+            
+
+                archiveFile.ViewFile();
+            }
+            else if(DocumentTypes.Contains(ext.ToLower()))
+            {
+                Document docFile = new Document(txtFileSamp.Text);
+
+                
+
+                docFile.ViewFile();
             }
             else
             {
-                File newFile = new File(txtPath.Text);
-                System.IO.FileInfo a = new System.IO.FileInfo(newFile.Name);
-                System.IO.FileAttributes b = a.Attributes;
                 
-                txtOutput.Text = newFile.Name + Environment.NewLine + newFile.Path +
-                            Environment.NewLine + newFile.FileSize.ToString() +
-                            Environment.NewLine + newFile.CreateDate.ToLongDateString() +
-                            Environment.NewLine + newFile.ModifiedDate.ToLongDateString() +
-                            Environment.NewLine + newFile.ReadOnly.ToString();
+                System.IO.FileInfo newFile = new System.IO.FileInfo(txtFileSamp.Text);
+                System.IO.FileAttributes b = newFile.Attributes;
+                
+                
             }
             
 
@@ -106,6 +81,7 @@ namespace File_Sorting
         public List<string> VideoTypes = new List<string>();
         public List<string> AudioTypes = new List<string>();
         public List<string> DocumentTypes = new List<string>();
+        public List<string> ArchiveTypes = new List<string>();
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -133,6 +109,45 @@ namespace File_Sorting
             DocumentTypes.Add(".pdf");
             DocumentTypes.Add(".docx");
             DocumentTypes.Add(".txt");
+
+            ArchiveTypes.Add(".zip");
+            ArchiveTypes.Add(".rar");
+            ArchiveTypes.Add(".7z");
+        }
+
+        private void btnSelectFile_Click_1(object sender, EventArgs e)
+        {
+            using (OpenFileDialog a = new OpenFileDialog())
+            {
+                if (a.ShowDialog() == DialogResult.OK)
+                {
+                    txtFileSamp.Text = a.FileName;
+                }
+            }
+        }
+
+        private void btnDestination_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddFile_Click(object sender, EventArgs e)
+        {
+            if(fdFolderChoice.ShowDialog() == DialogResult.OK)
+            {
+                string chosenFolder = fdFolderChoice.SelectedPath;
+
+                if (lbWatchedFolders.Items.Contains(chosenFolder))
+                {
+
+                }
+            }
+            
+        }
+
+        private void btnRemoveFile_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

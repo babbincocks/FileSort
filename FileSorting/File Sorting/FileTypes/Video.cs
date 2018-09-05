@@ -56,13 +56,13 @@ namespace File_Sorting
 
             else if (this.Extension.ToLower() == ".mp4")
             {
-                TagLib.Mpeg4.File a = new TagLib.Mpeg4.File(filePath);
+                TagLib.Mpeg4.File newMpg = new TagLib.Mpeg4.File(filePath);
 
-                _lengthInSeconds = (int)Math.Round(a.Properties.Duration.TotalSeconds);
+                _lengthInSeconds = (int)Math.Round(newMpg.Properties.Duration.TotalSeconds);
 
-                _resolution = a.Properties.VideoWidth.ToString() + " x " + a.Properties.VideoHeight.ToString();
+                _resolution = newMpg.Properties.VideoWidth.ToString() + " x " + newMpg.Properties.VideoHeight.ToString();
 
-                foreach (ICodec codec in a.Properties.Codecs)
+                foreach (ICodec codec in newMpg.Properties.Codecs)
                 {
                     if (codec.MediaTypes == TagLib.MediaTypes.Video)
                     {
@@ -123,6 +123,13 @@ namespace File_Sorting
         {
             get { return _frameRate; }
         }
+
+        public override void ViewFile()
+        {
+            System.Diagnostics.Process.Start(this.Path);
+        }
+
+
 
     }
 }

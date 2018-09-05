@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace File_Sorting
 {
-    class File
+    abstract class File
     {
         private string _name;
         private string _path;
@@ -100,6 +101,14 @@ namespace File_Sorting
 
             return aspects;
         }
+
+        public abstract void ViewFile();
+
+        public void MoveFile(string destination)
+        {
+            
+        }
+
 
     }
 }
