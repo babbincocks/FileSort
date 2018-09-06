@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace File_Sorting
 {
-    abstract class File
+    abstract class BaseFile
     {
         private string _name;
         private string _path;
@@ -18,7 +18,7 @@ namespace File_Sorting
         private bool _readOnly;
         private string _extension;
 
-        public File()
+        public BaseFile()
         {
             _name = "";
             _path = "";
@@ -39,7 +39,7 @@ namespace File_Sorting
         //    _readOnly = readOnly;
         //}
 
-        public File(string filePath)
+        public BaseFile(string filePath)
         {
             _path = filePath;
             string[] info = FullFileInfo(filePath);

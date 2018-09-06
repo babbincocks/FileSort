@@ -7,7 +7,7 @@ using TagLib;
 
 namespace File_Sorting
 {
-    class Audio : File
+    class Audio : BaseFile
     {
         private string _artist;
         private string _album;

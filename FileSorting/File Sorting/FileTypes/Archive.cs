@@ -9,7 +9,7 @@ using System.IO;
 
 namespace File_Sorting
 {
-    class Archive : File
+    class Archive : BaseFile
     {
         private int _fileCount;
         private string _encryptionType;
@@ -28,14 +28,17 @@ namespace File_Sorting
                 _encryptionType = zip.Encryption.ToString();
             }
 
-            
-
 
         }
 
         public int FileCount
         {
             get { return _fileCount; }
+        }
+
+        public string EncryptionType
+        {
+            get { return _encryptionType; }
         }
 
         public override void ViewFile()

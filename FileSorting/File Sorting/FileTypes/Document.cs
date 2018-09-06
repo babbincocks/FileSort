@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace File_Sorting
 {
-    class Document : File
+    class Document : BaseFile
     {
         
         public Document() : base()
@@ -18,8 +18,7 @@ namespace File_Sorting
 
         public Document(string filePath) : base(filePath)
         {
-            string a = "this is a sentence. blah blah";
-            int b = Regex.Matches(a, @"\b\w+\b").Count;
+            
         }
         
 

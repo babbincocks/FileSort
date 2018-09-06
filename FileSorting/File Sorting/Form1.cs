@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 
 
@@ -14,6 +15,12 @@ namespace File_Sorting
 {
     public partial class frmMain : Form
     {
+
+        bool activeCheck;
+        Queue<string> qFiles = new Queue<string>();
+        DateTime lastSearch;
+
+
         public frmMain()
         {
             InitializeComponent();
@@ -25,63 +32,87 @@ namespace File_Sorting
         private void btnVideo_Click(object sender, EventArgs e)
         {
 
-            string ext = System.IO.Path.GetExtension(txtFileSamp.Text);
+            errProv.Dispose();
 
-            if(VideoTypes.Contains(ext.ToLower()))
+            try
             {
-                Video videoFile = new Video(txtFileSamp.Text);
-               
-                videoFile.ViewFile();
+                if(txtFileSamp.Text == "")
+                {
+                    throw new Exception("No file chosen.");
+                }
+                else if(!File.Exists(txtFileSamp.Text))
+                {
+                    throw new Exception("That file does not exist, and thus can't be ran.");
+                }
 
+                string ext = Path.GetExtension(txtFileSamp.Text);
+
+
+                if (VideoTypes.Contains(ext.ToLower()))
+                {
+                    Video videoFile = new Video(txtFileSamp.Text);
+
+                    videoFile.ViewFile();
+
+
+                }
+                else if (GraphicTypes.Contains(ext.ToLower()))
+                {
+                    Graphic graphicFile = new Graphic(txtFileSamp.Text);
+
+
+                    graphicFile.ViewFile();
+                }
+                else if (AudioTypes.Contains(ext.ToLower()))
+                {
+                    Audio audioFile = new Audio(txtFileSamp.Text);
+
+                    audioFile.ViewFile();
+                }
+                else if (ArchiveTypes.Contains(ext.ToLower()))
+                {
+                    Archive archiveFile = new Archive(txtFileSamp.Text);
+
+
+
+                    archiveFile.ViewFile();
+                }
+                else if (DocumentTypes.Contains(ext.ToLower()))
+                {
+                    Document docFile = new Document(txtFileSamp.Text);
+
+
+
+                    docFile.ViewFile();
+                }
+                else
+                {
+                    throw new Exception("File type not found: the chosen file type is not supported.");
+                    //System.IO.FileInfo newFile = new System.IO.FileInfo(txtFileSamp.Text);
+                    //System.IO.FileAttributes b = newFile.Attributes;
+
+
+                }
 
             }
-            else if(GraphicTypes.Contains(ext.ToLower()))
+            catch(Exception ex)
             {
-                Graphic graphicFile = new Graphic(txtFileSamp.Text);
-     
-
-                graphicFile.ViewFile();
+                errProv.SetError(btnDisplay, ex.Message);
             }
-            else if(AudioTypes.Contains(ext.ToLower()))
-            {
-                Audio audioFile = new Audio(txtFileSamp.Text);
-
-                audioFile.ViewFile();
-            }
-            else if(ArchiveTypes.Contains(ext.ToLower()))
-            {
-                Archive archiveFile = new Archive(txtFileSamp.Text);
-
-            
-
-                archiveFile.ViewFile();
-            }
-            else if(DocumentTypes.Contains(ext.ToLower()))
-            {
-                Document docFile = new Document(txtFileSamp.Text);
-
-                
-
-                docFile.ViewFile();
-            }
-            else
-            {
-                
-                System.IO.FileInfo newFile = new System.IO.FileInfo(txtFileSamp.Text);
-                System.IO.FileAttributes b = newFile.Attributes;
-                
-                
-            }
-            
-
             
         }
+
+
+
 
         public List<string> GraphicTypes = new List<string>();
         public List<string> VideoTypes = new List<string>();
         public List<string> AudioTypes = new List<string>();
         public List<string> DocumentTypes = new List<string>();
         public List<string> ArchiveTypes = new List<string>();
+
+
+
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -113,10 +144,17 @@ namespace File_Sorting
             ArchiveTypes.Add(".zip");
             ArchiveTypes.Add(".rar");
             ArchiveTypes.Add(".7z");
+
+            activeCheck = false;
         }
+
+
+
 
         private void btnSelectFile_Click_1(object sender, EventArgs e)
         {
+            errProv.Dispose();
+
             using (OpenFileDialog a = new OpenFileDialog())
             {
                 if (a.ShowDialog() == DialogResult.OK)
@@ -126,28 +164,236 @@ namespace File_Sorting
             }
         }
 
+
+
+
         private void btnDestination_Click(object sender, EventArgs e)
         {
+            errProv.Dispose();
 
+            fdFolderChoice.ShowNewFolderButton = true;
+
+            if (fdFolderChoice.ShowDialog() == DialogResult.OK)
+            {
+                txtDestPath.Text = fdFolderChoice.SelectedPath;
+            }
+
+            CheckButtonState();
         }
+
+
+
 
         private void btnAddFile_Click(object sender, EventArgs e)
         {
-            if(fdFolderChoice.ShowDialog() == DialogResult.OK)
+            errProv.Dispose();
+            fdFolderChoice.ShowNewFolderButton = false;
+
+            try
             {
-                string chosenFolder = fdFolderChoice.SelectedPath;
-
-                if (lbWatchedFolders.Items.Contains(chosenFolder))
+                if (fdFolderChoice.ShowDialog() == DialogResult.OK)
                 {
+                    string chosenFolder = fdFolderChoice.SelectedPath;
 
+                    if (!lbWatchedFolders.Items.Contains(chosenFolder))
+                    {
+                        lbWatchedFolders.Items.Add(chosenFolder);
+                        lbWatchedFolders.TopIndex = lbWatchedFolders.Items.Count - 1;
+                    }
+                    else
+                    {
+                        lbWatchedFolders.SelectedItem = chosenFolder;
+                    }
                 }
             }
-            
+            catch(Exception ex)
+            {
+                errProv.SetError(btnAddFile, ex.Message);
+            }
+
+            fdFolderChoice.ShowNewFolderButton = true;
+
+
+            CheckButtonState();
         }
+
+
+
 
         private void btnRemoveFile_Click(object sender, EventArgs e)
         {
+            errProv.Dispose();
+            fdFolderChoice.ShowNewFolderButton = false;
 
+            try
+            {
+
+                if (lbWatchedFolders.Items.Count > 0)
+                {
+                    if (fdFolderChoice.ShowDialog() == DialogResult.OK)
+                    {
+                        string chosenFolder = fdFolderChoice.SelectedPath;
+
+                        if (lbWatchedFolders.Items.Contains(chosenFolder))
+                        {
+                            lbWatchedFolders.Items.Remove(chosenFolder);
+                        }
+                        else
+                        {
+                            throw new Exception("The chosen directory does not exist in the previously chosen directories");
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("No directories have been previously chosen, so there's nothing to remove.");
+                }
+            }
+            catch(Exception ex)
+            {
+                errProv.SetError(btnRemoveFile, ex.Message);
+            }
+
+            fdFolderChoice.ShowNewFolderButton = true;
+
+            CheckButtonState();
+        }
+
+
+
+
+        private void btnTrack_Click(object sender, EventArgs e)
+        {
+            errProv.Dispose();
+
+            try
+            {
+                
+
+                if (activeCheck)
+                {
+                    checkTimer.Enabled = false;
+                    activeCheck = false;
+
+                }
+                else
+                {
+                    
+
+                    if (txtDestPath.Text != "" && lbWatchedFolders.Items.Count > 0)
+                    {
+                        if (Directory.Exists(txtDestPath.Text))
+                        {
+                            activeCheck = true;
+                            checkTimer.Enabled = true;
+                            lastSearch = DateTime.Now;
+                        }
+                        else
+                        {
+                            throw new Exception("The destination folder chosen does not exist.");
+                        }
+                    }
+                    else if (txtDestPath.Text == "")
+                    {
+                        throw new Exception("No destination folder chosen.");
+                    }
+                    else if (lbWatchedFolders.Items.Count == 0)
+                    {
+                        throw new Exception("No items to track have been chosen.");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                errProv.SetError(btnTrack, ex.Message);
+            }
+
+            CheckButtonState();
+        }
+
+
+
+
+        private void checkTimer_Tick(object sender, EventArgs e)
+        {
+            checkTimer.Enabled = false;
+            MoveToArchive();
+            MoveQueuedFiles();
+
+            lastSearch = DateTime.Now;
+            checkTimer.Enabled = activeCheck;
+            Application.DoEvents();
+        }
+
+
+        private void MoveToArchive()
+        {
+            foreach (string path in lbWatchedFolders.Items)
+            {
+                ScanFolder(path);
+            }
+        }
+
+        private void ScanFolder(string startingFolder)
+        {
+            DateTime write;
+            try
+            {
+                foreach (string file in Directory.GetFiles(startingFolder))
+                {
+                    write = File.GetLastWriteTime(file);
+
+                    if(write > lastSearch && !qFiles.Contains(file))
+                    {
+                        qFiles.Enqueue(file);
+                    }
+                }
+
+                foreach (string directory in Directory.GetDirectories(startingFolder))
+                {
+                    ScanFolder(directory);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void CheckButtonState()
+        {
+            if (txtDestPath.Text.Length > 0 && lbWatchedFolders.Items.Count > 0)
+            {
+                if(!activeCheck)
+                {
+                    btnTrack.BackColor = Color.Green;
+                    btnTrack.Text = "Start Tracking";
+                }
+                else
+                {
+                    btnTrack.BackColor = Color.Red;
+                    btnTrack.Text = "Stop Tracking";
+                }
+            }
+            else
+            {
+                btnTrack.BackColor = Color.Red;
+                btnTrack.Text = "Start Tracking";
+            }
+        }
+
+        private void MoveQueuedFiles()
+        {
+            while(qFiles.Count != 0)
+            {
+
+                string file = qFiles.Dequeue();
+                string fileName = Path.GetFileName(file);
+                string newDest = Path.Combine(txtDestPath.Text, fileName);
+                File.Copy(file, newDest, true);
+                
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace File_Sorting
 {
-    class Graphic : File
+    class Graphic : BaseFile
     {
         private string _resolution;
 

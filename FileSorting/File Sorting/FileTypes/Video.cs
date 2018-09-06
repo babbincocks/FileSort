@@ -10,7 +10,7 @@ using Shell32;
 
 namespace File_Sorting
 {
-    class Video : File
+    class Video : BaseFile
     {
         
         private int _lengthInSeconds;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnDisplay = new System.Windows.Forms.Button();
             this.btnAddFile = new System.Windows.Forms.Button();
             this.txtDestPath = new System.Windows.Forms.TextBox();
@@ -37,6 +38,10 @@
             this.txtFileSamp = new System.Windows.Forms.TextBox();
             this.btnRemoveFile = new System.Windows.Forms.Button();
             this.fdFolderChoice = new System.Windows.Forms.FolderBrowserDialog();
+            this.errProv = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnTrack = new System.Windows.Forms.Button();
+            this.checkTimer = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errProv)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDisplay
@@ -113,11 +118,33 @@
             this.btnRemoveFile.UseVisualStyleBackColor = true;
             this.btnRemoveFile.Click += new System.EventHandler(this.btnRemoveFile_Click);
             // 
+            // errProv
+            // 
+            this.errProv.BlinkRate = 300;
+            this.errProv.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
+            this.errProv.ContainerControl = this;
+            // 
+            // btnTrack
+            // 
+            this.btnTrack.BackColor = System.Drawing.Color.Red;
+            this.btnTrack.Location = new System.Drawing.Point(493, 181);
+            this.btnTrack.Name = "btnTrack";
+            this.btnTrack.Size = new System.Drawing.Size(97, 30);
+            this.btnTrack.TabIndex = 8;
+            this.btnTrack.Text = "Start Tracking";
+            this.btnTrack.UseVisualStyleBackColor = false;
+            this.btnTrack.Click += new System.EventHandler(this.btnTrack_Click);
+            // 
+            // checkTimer
+            // 
+            this.checkTimer.Tick += new System.EventHandler(this.checkTimer_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnTrack);
             this.Controls.Add(this.btnRemoveFile);
             this.Controls.Add(this.txtFileSamp);
             this.Controls.Add(this.btnSelectFile);
@@ -129,6 +156,7 @@
             this.Name = "frmMain";
             this.Text = "File Sorting";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errProv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,6 +173,9 @@
         private System.Windows.Forms.TextBox txtFileSamp;
         private System.Windows.Forms.Button btnRemoveFile;
         private System.Windows.Forms.FolderBrowserDialog fdFolderChoice;
+        private System.Windows.Forms.ErrorProvider errProv;
+        private System.Windows.Forms.Button btnTrack;
+        private System.Windows.Forms.Timer checkTimer;
     }
 }
 
