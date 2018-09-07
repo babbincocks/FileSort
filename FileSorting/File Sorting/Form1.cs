@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-
+using System.Diagnostics;
 
 
 namespace File_Sorting
@@ -17,7 +17,7 @@ namespace File_Sorting
     {
 
         bool activeCheck;
-        Queue<string> qFiles = new Queue<string>();
+        Queue<string> qDirectories = new Queue<string>();
         DateTime lastSearch;
 
 
@@ -269,11 +269,13 @@ namespace File_Sorting
             try
             {
                 
-
+                //TODO: If multiple directories are added to lbWatchedFolders, the archive doesn't properly split up each directory into their own folder, and instead puts it all into one.
+                
                 if (activeCheck)
                 {
                     checkTimer.Enabled = false;
                     activeCheck = false;
+                    loops = 0;
 
                 }
                 else
@@ -285,6 +287,7 @@ namespace File_Sorting
                         if (Directory.Exists(txtDestPath.Text))
                         {
                             activeCheck = true;
+                            MoveToArchive();
                             checkTimer.Enabled = true;
                             lastSearch = DateTime.Now;
                         }
@@ -328,9 +331,21 @@ namespace File_Sorting
 
         private void MoveToArchive()
         {
-            foreach (string path in lbWatchedFolders.Items)
+            string caller = new StackFrame(1).GetMethod().Name;
+            if (caller == "checkTimer_Tick")
             {
-                ScanFolder(path);
+                foreach (string path in lbWatchedFolders.Items)
+                {
+                    ScanFolder(path);
+                    loops = 0;
+                }
+            }
+            else
+            {
+                foreach (string path in lbWatchedFolders.Items)
+                {
+                    ScanFolder(path, txtDestPath.Text);
+                }
             }
         }
 
@@ -343,10 +358,11 @@ namespace File_Sorting
                 {
                     write = File.GetLastWriteTime(file);
 
-                    if(write > lastSearch && !qFiles.Contains(file))
+                    if(write > lastSearch && !qDirectories.Contains(file))
                     {
-                        qFiles.Enqueue(file);
+                        qDirectories.Enqueue(file);
                     }
+
                 }
 
                 foreach (string directory in Directory.GetDirectories(startingFolder))
@@ -358,6 +374,70 @@ namespace File_Sorting
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private int loops;
+        private string baseDirectory;
+
+        private void ScanFolder(string startingFolder, string destFolder)
+        {
+            DateTime write;
+            string fileName;
+            string newDest;
+            string fullPath;
+            string directoryName;
+            string combPath = baseDirectory;
+            try
+            {
+                
+
+                if (loops == 0)
+                {
+                    fullPath = Path.GetFullPath(startingFolder).TrimEnd(Path.DirectorySeparatorChar);
+                    directoryName = fullPath.Split(Path.DirectorySeparatorChar).Last();
+                    combPath = Path.Combine(destFolder, directoryName);
+
+                    if (!Directory.Exists(combPath))
+                    {
+                        Directory.CreateDirectory(combPath);
+                        baseDirectory = combPath;
+                    }
+                    loops++;
+                }
+
+                
+
+                foreach (string file in Directory.GetFiles(startingFolder))
+                {
+                    
+                    fileName = Path.GetFileName(file);
+                    newDest = Path.Combine(combPath, fileName);
+                    write = File.GetLastWriteTime(newDest);
+
+                    
+                    if (write > lastSearch)
+                    {
+                        File.Copy(file, newDest, true);
+                    }
+
+                }
+
+                foreach (string directory in Directory.GetDirectories(startingFolder))
+                {
+                    
+                    ScanFolder(directory, destFolder);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void InitialMove()
+        {
+            
         }
 
 
@@ -385,10 +465,10 @@ namespace File_Sorting
 
         private void MoveQueuedFiles()
         {
-            while(qFiles.Count != 0)
+            while(qDirectories.Count != 0)
             {
 
-                string file = qFiles.Dequeue();
+                string file = qDirectories.Dequeue();
                 string fileName = Path.GetFileName(file);
                 string newDest = Path.Combine(txtDestPath.Text, fileName);
                 File.Copy(file, newDest, true);
