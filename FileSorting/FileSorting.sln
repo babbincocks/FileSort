@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "File Sorting", "File Sorting\File Sorting.csproj", "{57BA7216-A093-4A54-B987-C6FF063EF582}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{2BFE7D6C-B6AF-4C02-976B-CE1FB8311059}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{57BA7216-A093-4A54-B987-C6FF063EF582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57BA7216-A093-4A54-B987-C6FF063EF582}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57BA7216-A093-4A54-B987-C6FF063EF582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BFE7D6C-B6AF-4C02-976B-CE1FB8311059}.Debug|Any CPU.ActiveCfg = Debug
+		{2BFE7D6C-B6AF-4C02-976B-CE1FB8311059}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,24 @@
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\File Sorting.exe.config
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\File Sorting.exe
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\File Sorting.pdb
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\DotNetZip.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\policy.2.0.taglib-sharp.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\taglib-sharp.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\DotNetZip.xml
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\policy.2.0.taglib-sharp.config
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\Interop.Shell32.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\Interop.WMPLib.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\AxInterop.Shell32.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\bin\Release\AxInterop.WMPLib.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\Interop.Shell32.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\Interop.WMPLib.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\AxInterop.Shell32.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\AxInterop.WMPLib.dll
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\File Sorting.csproj.ResolveComReference.cache
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\File_Sorting.frmMain.resources
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\File_Sorting.Properties.Resources.resources
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\File Sorting.csproj.GenerateResource.cache
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\File Sorting.csproj.CoreCompileInputs.cache
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\File Sorting.csproj.CopyComplete
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\File Sorting.exe
+C:\Users\Cyberadmin\Desktop\FileSort\FileSorting\File Sorting\obj\Release\File Sorting.pdb

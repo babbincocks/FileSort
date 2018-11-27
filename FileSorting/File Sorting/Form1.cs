@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 
 namespace File_Sorting
@@ -332,21 +328,22 @@ namespace File_Sorting
         private void MoveToArchive()
         {
             string caller = new StackFrame(1).GetMethod().Name;
-            if (caller == "checkTimer_Tick")
-            {
-                foreach (string path in lbWatchedFolders.Items)
-                {
-                    ScanFolder(path);
-                    loops = 0;
-                }
-            }
-            else
-            {
+            //if (caller == "checkTimer_Tick")
+            //{
+            //    foreach (string path in lbWatchedFolders.Items)
+            //    {
+            //        ScanFolder(path);
+            //        loops = 0;
+            //    }
+            //}
+            //else
+            //{
                 foreach (string path in lbWatchedFolders.Items)
                 {
                     ScanFolder(path, txtDestPath.Text);
+                loops = 0;
                 }
-            }
+            //}
         }
 
         private void ScanFolder(string startingFolder)
@@ -403,6 +400,7 @@ namespace File_Sorting
                         baseDirectory = combPath;
                     }
                     loops++;
+
                 }
 
                 
@@ -426,6 +424,7 @@ namespace File_Sorting
                 {
                     
                     ScanFolder(directory, destFolder);
+                    
                 }
                 
             }
@@ -435,10 +434,6 @@ namespace File_Sorting
             }
         }
 
-        private void InitialMove()
-        {
-            
-        }
 
 
         private void CheckButtonState()
